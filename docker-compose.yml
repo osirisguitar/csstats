@@ -1,0 +1,22 @@
+services:
+  mariadb:
+    image: mariadb:11
+    container_name: csstats-mariadb
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: rootpw
+      MARIADB_DATABASE: csstats
+      MARIADB_USER: csstats
+      MARIADB_PASSWORD: csstats
+    ports:
+      - "3306:3306"
+    volumes:
+      - csstats-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  csstats-data:
