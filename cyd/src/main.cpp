@@ -186,7 +186,8 @@ void drawCardFrame(int index, uint32_t accent, bool pressed = false) {
     snprintf(detail, sizeof(detail), "%lu/%lu",
              (unsigned long)snapshot.kills, (unsigned long)snapshot.deaths);
   } else if (index == 1) {
-    snprintf(detail, sizeof(detail), "%lu wins", (unsigned long)snapshot.wins);
+    snprintf(detail, sizeof(detail), "%lu/%lu",
+             (unsigned long)snapshot.matchesPlayed, (unsigned long)snapshot.wins);
   } else {
     if (snapshot.matchesPlayed > 0) {
       snprintf(detail, sizeof(detail), "%.2f",
@@ -195,7 +196,7 @@ void drawCardFrame(int index, uint32_t accent, bool pressed = false) {
       detail[0] = '\0';
     }
   }
-  tft.drawString(detail, x + 10, CARD_Y + CARD_H - 14);
+  tft.drawString(detail, x + 10, CARD_Y + CARD_H - 16);
 }
 
 void drawFooter() {
